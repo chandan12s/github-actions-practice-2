@@ -1,0 +1,22 @@
+name: Build java application
+on:
+  push:
+    branches:
+      - master
+      - main
+jobs:
+  buildJob:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Set up java and maven
+        uses: actions/setup-java@v5
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Build with Maven
+        run: mvn clean install package
